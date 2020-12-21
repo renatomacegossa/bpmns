@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1fvazen" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.10.0">
-  <bpmn:process id="Process_10k30rw" name="teste" isExecutable="true">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1fvazen" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Zeebe Modeler" exporterVersion="0.10.0">
+  <bpmn:process id="calculadora" name="calculadora" isExecutable="true">
     <bpmn:startEvent id="servico-consumido" name="Servico Consumido&#10;&#10;">
       <bpmn:outgoing>Flow_08ddk1q</bpmn:outgoing>
     </bpmn:startEvent>
@@ -10,9 +10,9 @@
       <bpmn:outgoing>Flow_0gurwh9</bpmn:outgoing>
       <bpmn:outgoing>Flow_1fr3f5v</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:sequenceFlow id="Flow_0gurwh9" sourceRef="Gateway_0ey6xme" targetRef="obter-x" />
+    <bpmn:sequenceFlow id="Flow_0gurwh9" sourceRef="Gateway_0ey6xme" targetRef="obter-t" />
     <bpmn:sequenceFlow id="Flow_1fr3f5v" sourceRef="Gateway_0ey6xme" targetRef="obter-y" />
-    <bpmn:sequenceFlow id="Flow_1sh12c4" sourceRef="obter-x" targetRef="Gateway_1mh2mga" />
+    <bpmn:sequenceFlow id="Flow_1sh12c4" sourceRef="obter-t" targetRef="Gateway_1mh2mga" />
     <bpmn:parallelGateway id="Gateway_1mh2mga">
       <bpmn:incoming>Flow_1sh12c4</bpmn:incoming>
       <bpmn:incoming>Flow_0x2kina</bpmn:incoming>
@@ -64,37 +64,58 @@
     <bpmn:sequenceFlow id="Flow_0zq7k8x" sourceRef="calcular-f2" targetRef="Gateway_186nulr" />
     <bpmn:sequenceFlow id="Flow_1boyfbl" sourceRef="Gateway_186nulr" targetRef="servico-apurado" />
     <bpmn:sequenceFlow id="Flow_1bsddga" sourceRef="calcular-f" targetRef="Gateway_08m30l4" />
-    <bpmn:serviceTask id="obter-x" name="Obter X">
+    <bpmn:serviceTask id="obter-t" name="Obter T">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="obter-t" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0gurwh9</bpmn:incoming>
       <bpmn:outgoing>Flow_1sh12c4</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="obter-y" name="Obter Y">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="obter-y" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1fr3f5v</bpmn:incoming>
       <bpmn:outgoing>Flow_0x2kina</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="calcular-n" name="Calcular N">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="calcular-n" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_02womi1</bpmn:incoming>
       <bpmn:outgoing>Flow_1vpa5qj</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="calcular-f" name="Calcular F">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="calcular-f" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0rw46hj</bpmn:incoming>
       <bpmn:outgoing>Flow_1bsddga</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="calcular-c" name="Calcular C">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="calcular-c" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0rb9zg4</bpmn:incoming>
       <bpmn:outgoing>Flow_048akzb</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="calcular-i" name="Calcular I">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="calcular-i" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1u3bpv3</bpmn:incoming>
       <bpmn:outgoing>Flow_1k11ve1</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="calcular-f2" name="Calcular F">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="calcular-f2" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_1k11ve1</bpmn:incoming>
       <bpmn:outgoing>Flow_0zq7k8x</bpmn:outgoing>
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_10k30rw">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="calculadora">
       <bpmndi:BPMNEdge id="Flow_08ddk1q_di" bpmnElement="Flow_08ddk1q">
         <di:waypoint x="168" y="180" />
         <di:waypoint x="225" y="180" />
@@ -220,7 +241,7 @@
       <bpmndi:BPMNShape id="Gateway_0gaw2uf_di" bpmnElement="Gateway_186nulr">
         <dc:Bounds x="1165" y="385" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1xny3yc_di" bpmnElement="obter-x">
+      <bpmndi:BPMNShape id="Activity_1xny3yc_di" bpmnElement="obter-t">
         <dc:Bounds x="340" y="140" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1u4cvn2_di" bpmnElement="obter-y">
